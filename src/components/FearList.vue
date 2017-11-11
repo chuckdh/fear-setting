@@ -21,6 +21,12 @@
       <b-row>
 
         <b-col>
+          <transition name="fade">
+            <b-alert v-show="!hasEnoughFears" show variant="info">
+              Ideally, you should have arond 10 to 20 fears.
+            </b-alert>
+          </transition>
+
           <p class="text-center">
             <a href="#" role="button" class="btn btn-primary btn-lg" v-on:click.prevent="addFear">Add fear</a>
           </p>
@@ -35,28 +41,28 @@
                 <th scope="col"></th>
               </tr>
             </thead>
-            
-              <transition-group name="list" tag="tbody">
-                <tr v-for="(fear, index) in fears" :key="fear.id">
-                  <th scope="row">{{ index + 1 }}</th>
-                  <td>
-                    <div class="form-group">
-                      <input class="form-control" v-model="fear.define" placeholder="Define">
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-group">
-                      <textarea class="form-control" v-model="fear.prevent" placeholder="Prevent" rows="3"></textarea>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-group">
-                      <textarea class="form-control" v-model="fear.repair" placeholder="Repair" rows="3"></textarea>
-                    </div>
-                  </td>
-                  <td><a href="#" role="button" class="btn btn-danger btn-sm" v-on:click.prevent="removeFear(fear)">Remove</a></td>
-                </tr>
-              </transition-group>
+          
+            <transition-group name="list" tag="tbody">
+              <tr v-for="(fear, index) in fears" :key="fear.id">
+                <th scope="row">{{ index + 1 }}</th>
+                <td>
+                  <div class="form-group">
+                    <input class="form-control" v-model="fear.define" placeholder="Define">
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <textarea class="form-control" v-model="fear.prevent" placeholder="Prevent" rows="3"></textarea>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <textarea class="form-control" v-model="fear.repair" placeholder="Repair" rows="3"></textarea>
+                  </div>
+                </td>
+                <td><a href="#" role="button" class="btn btn-danger btn-sm" v-on:click.prevent="removeFear(fear)">Remove</a></td>
+              </tr>
+            </transition-group>
             
           </table>
           
@@ -69,34 +75,34 @@
 </template>
 
 <script>
-/*
-This component holds a list of the fears defined on the first page. 
-Each fear has a 3 properties: define, prevent, repair. All text.
-*/
-import uuidv4 from 'uuid/v4'
-import data from './fears.js'
-
 export default {
-  data: function() {
-    return data
+  computed: {
+    fears: function () {
+      return this.$store.state.fears;
+    },
+    hasEnoughFears () {
+      return this.$store.getters.hasEnoughFears;
+    }
   },
   methods: {
-    addFear: function() {
-      this.fears.push({
-        id: uuidv4(),
-        define: '',
-        prevent: '',
-        repair: ''
-      });
+    addFear () {
+      this.$store.commit('addFear')
     },
     removeFear: function(fear) {
-      this.fears.splice(this.fears.indexOf(fear), 1)
+      this.$store.commit('removeFear', fear)
     }
   }
 }
 </script>
 
 <style>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0
+}
+
 .list-item {
   display: inline-block;
   margin-right: 10px;

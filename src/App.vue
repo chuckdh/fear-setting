@@ -12,8 +12,9 @@
         <b-navbar-nav>
           <VLink href="/">Welcome</VLink>
           <VLink href="/fear-list">1: The Fear List</VLink>
-          <VLink href="/benefits">2: Your Benefits</VLink>
+          <VLink href="/your-benefits">2: Your Benefits</VLink>
           <VLink href="/cost-of-inaction">3: The Cost of Inaction</VLink>
+          <VLink href="/conclusion">Conclusion</VLink>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
@@ -28,6 +29,9 @@
 
               <Welcome v-if="ViewComponent == 'Welcome'"></Welcome>
               <FearList v-else-if="ViewComponent == 'FearList'"></FearList>
+              <YourBenefits v-else-if="ViewComponent == 'YourBenefits'"></YourBenefits>
+              <CostOfInaction v-else-if="ViewComponent == 'CostOfInaction'"></CostOfInaction>
+              <Conclusion v-else-if="ViewComponent == 'Conclusion'"></Conclusion>
               <template v-else>
                 <b-alert show variant="danger">
                   <h1>404</h1>
@@ -47,27 +51,28 @@ import VLink from './components/VLink.vue'
 import routes from './routes'
 
 import Welcome from './components/Welcome.vue'
-import FearList from './components/fearList/FearList.vue'
+import FearList from './components/FearList.vue'
+import YourBenefits from './components/YourBenefits.vue'
+import CostOfInaction from './components/CostOfInaction.vue'
+import Conclusion from './components/Conclusion.vue'
 
 export default {
   name: 'app',
-  data() {
-    return {
-
-    };
-  },
   computed: {
-      currentRoute () {
-        return this.$root.currentRoute
-      },
-      ViewComponent () {
-        return routes[this.currentRoute];
-      }
+    currentRoute () {
+      return this.$root.currentRoute
     },
+    ViewComponent () {
+      return routes[this.currentRoute];
+    }
+  },
   components: {
     VLink: VLink,
     Welcome: Welcome,
-    FearList: FearList
+    FearList: FearList,
+    YourBenefits: YourBenefits,
+    CostOfInaction: CostOfInaction,
+    Conclusion: Conclusion
   }
 }
 </script>
