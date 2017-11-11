@@ -32,6 +32,7 @@
               <YourBenefits v-else-if="ViewComponent == 'YourBenefits'"></YourBenefits>
               <CostOfInaction v-else-if="ViewComponent == 'CostOfInaction'"></CostOfInaction>
               <Conclusion v-else-if="ViewComponent == 'Conclusion'"></Conclusion>
+              <LegalInformation v-else-if="ViewComponent == 'LegalInformation'"></LegalInformation>
               <template v-else>
                 <b-alert show variant="danger">
                   <h1>404</h1>
@@ -42,6 +43,14 @@
             </b-col>
         </b-row>
     </b-container>
+
+    <b-navbar class="navbar fixed-bottom" toggleable="md">
+      <b-navbar-nav>
+        <VLink href="/terms-and-conditions">Terms And Conditions</VLink>
+        <VLink href="/privacy-policy">Privacy Policy</VLink>
+        <VLink href="/cookie-policy">Cookie Policy</VLink>
+      </b-navbar-nav>
+    </b-navbar>
   </div>
 
 </template>
@@ -55,6 +64,7 @@ import FearList from './components/FearList.vue'
 import YourBenefits from './components/YourBenefits.vue'
 import CostOfInaction from './components/CostOfInaction.vue'
 import Conclusion from './components/Conclusion.vue'
+import LegalInformation from './components/LegalInformation.vue'
 
 export default {
   name: 'app',
@@ -72,7 +82,8 @@ export default {
     FearList: FearList,
     YourBenefits: YourBenefits,
     CostOfInaction: CostOfInaction,
-    Conclusion: Conclusion
+    Conclusion: Conclusion,
+    LegalInformation: LegalInformation
   }
 }
 </script>
