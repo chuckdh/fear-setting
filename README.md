@@ -13,7 +13,7 @@ for dev server
 
 ## Scope
 
-This project aims to replicate the paper-based fear-setting method descriped in [this](https://www.ted.com/talks/tim_ferriss_why_you_should_define_your_fears_instead_of_your_goals) TED video by [Tim Ferriss](https://www.ted.com/speakers/tim_ferriss) on an responsive, gadget friendly online way, with syncing between multiple devices.
+This project aims to replicate the paper-based fear-setting method descriped in [this](https://www.ted.com/talks/tim_ferriss_why_you_should_define_your_fears_instead_of_your_goals) TED video by [Tim Ferriss](https://www.ted.com/speakers/tim_ferriss) in an responsive, gadget friendly online way, with syncing between multiple devices.
 
 ## This app
 

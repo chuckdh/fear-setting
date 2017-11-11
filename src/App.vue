@@ -1,36 +1,38 @@
 <template>
   <div id="app">
 
-<b-navbar toggleable="md" type="dark" variant="primary">
+    <b-navbar toggleable="md" type="dark" variant="primary">
 
-  <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
-  <b-navbar-brand>Fear-Setting online</b-navbar-brand>
+      <b-navbar-brand>Fear-Setting online</b-navbar-brand>
 
-  <b-collapse is-nav id="nav_collapse">
+      <b-collapse is-nav id="nav_collapse">
 
-    <b-navbar-nav>
-      <VLink href="/">Welcome</VLink>
-      <VLink href="/fear-list">Fear list</VLink>
-      <VLink href="/benefits">Benefits</VLink>
-      <VLink href="/cost-of-inaction">The Cost of Inaction</VLink>
-    </b-navbar-nav>
+        <b-navbar-nav>
+          <VLink href="/">Welcome</VLink>
+          <VLink href="/fear-list">1: The Fear List</VLink>
+          <VLink href="/benefits">2: Your Benefits</VLink>
+          <VLink href="/cost-of-inaction">3: The Cost of Inaction</VLink>
+        </b-navbar-nav>
 
-    <b-navbar-nav class="ml-auto">
-      <b-nav-item href="https://github.com/chuckdh/fear-setting">Github</b-nav-item>
-    </b-navbar-nav>
-  </b-collapse>
-</b-navbar>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item href="https://github.com/chuckdh/fear-setting">Github</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
 
-
-    <b-container class="bv-example-row">
+    <b-container class="top-margin">
         <b-row>
             <b-col>
 
               <Welcome v-if="ViewComponent == 'Welcome'"></Welcome>
               <FearList v-else-if="ViewComponent == 'FearList'"></FearList>
               <template v-else>
-                404
+                <b-alert show variant="danger">
+                  <h1>404</h1>
+                  <p>Sajnos ez az oldal nem létezik :(</p>
+                </b-alert>
               </template>
 
             </b-col>
@@ -41,7 +43,6 @@
 </template>
 
 <script>
-import Error404 from './errors/404.vue'
 import VLink from './components/VLink.vue'
 import routes from './routes'
 
@@ -60,24 +61,19 @@ export default {
         return this.$root.currentRoute
       },
       ViewComponent () {
-        const matchingView = routes[this.currentRoute]
-        console.log(matchingView);
-
-        return matchingView;
+        return routes[this.currentRoute];
       }
     },
   components: {
     VLink: VLink,
-    Error404: Error404,
     Welcome: Welcome,
     FearList: FearList
-  },
-  methods: {
-
   }
 }
 </script>
 
 <style lang="scss">
-
+.top-margin {
+  margin-top: 30px;
+}
 </style>
