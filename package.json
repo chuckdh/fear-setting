@@ -15,7 +15,7 @@
     "build": "webpack --config webpack.prod.js",
     "dev": "node ./src/server/server.js",
     "webpack": "webpack-dev-server --config webpack.dev.js --open",
-    "start": "cross-env NODE_ENV=production PORT=80 node ./src/server/server.js"
+    "start": "cross-env NODE_ENV=production node ./src/server/server.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.31",

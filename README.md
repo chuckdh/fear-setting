@@ -12,7 +12,7 @@ or, for production
 
     yarn # Install deps
     yarn run build # Build app for production to ./dist
-    yarn run start # Start web server in production mode (port 80)
+    yarn cross-env PORT=80 yarn start # Start web server in production mode on port 80
 
 for dev server
 
