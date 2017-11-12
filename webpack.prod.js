@@ -4,6 +4,9 @@ const webpack = require('webpack');
 
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
+const port = process.env.PORT || 80;
+console.log('Using port: '+port)
+
 module.exports = merge(common, {
   devtool: 'source-map',
   plugins: [
@@ -13,7 +16,7 @@ module.exports = merge(common, {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production'),
-        'PORT': JSON.stringify(process.env.PORT || 80)
+        'PORT': JSON.stringify(port)
       },
     })
   ]
