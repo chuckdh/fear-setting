@@ -12,8 +12,15 @@ import store from './store';
 const protocol = location.protocol;
 const slashes = protocol.concat("//");
 const host = slashes.concat(window.location.hostname);
-const port = process.env.PORT || 3000;
-const url = host.concat(':'+port);
+const port = process.env.PORT || 80;
+
+let url;
+if(port === 80 || port === 443) {
+  url = host;
+} else {
+  url = host.concat(':'+port);
+}
+
 console.log('Connectiong on  '+url)
 
 Vue.use(VueSocketio, url, store);
