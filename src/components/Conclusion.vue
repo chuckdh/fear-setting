@@ -49,7 +49,7 @@
       </b-row>
 
       <b-row>
-        <b-col>
+        <b-col sm="12" md="6">
           <h2>Possible benefits</h2>
 
           <b-alert v-if="!hasBenefits" show variant="warning">
@@ -61,7 +61,7 @@
 
         </b-col>
 
-        <b-col>
+        <b-col sm="12" md="6">
           <h2>The Cost of Inaction</h2>
 
           <b-alert v-if="!hasCost" show variant="warning">

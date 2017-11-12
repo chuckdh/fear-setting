@@ -49,11 +49,16 @@
     </b-container>
 
     <b-navbar class="navbar footer" toggleable="md">
-      <b-navbar-nav>
-        <VLink href="/terms-and-conditions">Terms And Conditions</VLink>
-        <VLink href="/privacy-policy">Privacy Policy</VLink>
-        <VLink href="/cookie-policy">Cookie Policy</VLink>
-      </b-navbar-nav>
+      <b-navbar-toggle target="footer_collapse"></b-navbar-toggle>
+
+      <b-collapse is-nav id="footer_collapse">
+        <b-navbar-nav>
+          <VLink href="/terms-and-conditions">Terms And Conditions</VLink>
+          <VLink href="/privacy-policy">Privacy Policy</VLink>
+          <VLink href="/cookie-policy">Cookie Policy</VLink>
+        </b-navbar-nav>
+      </b-collapse>
+
     </b-navbar>
     </template>
 

@@ -12,7 +12,7 @@ import store from './store';
 const protocol = location.protocol;
 const slashes = protocol.concat("//");
 const host = slashes.concat(window.location.hostname);
-const port = process.env.PORT || 80;
+const port = parseInt(process.env.PORT) || 80;
 
 let url;
 if(port === 80 || port === 443) {
