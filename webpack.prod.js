@@ -13,7 +13,7 @@ module.exports = merge(common, {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production'),
-        'PORT': JSON.stringify(80)
+        'PORT': JSON.stringify(process.env.PORT || 80)
       },
     })
   ]
