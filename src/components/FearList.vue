@@ -43,25 +43,13 @@
             </thead>
           
             <transition-group name="list" tag="tbody">
-              <tr v-for="(fear, index) in fears" :key="fear.id">
-                <th scope="row">{{ index + 1 }}</th>
-                <td>
-                  <div class="form-group">
-                    <input class="form-control" v-model="fear.define" placeholder="Define">
-                  </div>
-                </td>
-                <td>
-                  <div class="form-group">
-                    <textarea class="form-control" v-model="fear.prevent" placeholder="Prevent" rows="3"></textarea>
-                  </div>
-                </td>
-                <td>
-                  <div class="form-group">
-                    <textarea class="form-control" v-model="fear.repair" placeholder="Repair" rows="3"></textarea>
-                  </div>
-                </td>
-                <td><a href="#" role="button" class="btn btn-danger btn-sm" v-on:click.prevent="removeFear(fear)">Remove</a></td>
-              </tr>
+              <FearItem
+                v-for="(fear, key, index) in fears"
+                v-bind:initalFear="fear"
+                v-bind:index="index"
+                v-bind:key="key"
+                v-bind:fearKey="key"
+                v-on:removeFear="removeFear(key)"></FearItem>
             </transition-group>
             
           </table>
@@ -75,6 +63,8 @@
 </template>
 
 <script>
+import FearItem from './FearItem.vue'
+
 export default {
   computed: {
     fears: function () {
@@ -87,10 +77,15 @@ export default {
   methods: {
     addFear () {
       this.$store.commit('addFear')
+      this.$socket.emit('set fears', this.fears);
     },
-    removeFear: function(fear) {
-      this.$store.commit('removeFear', fear)
+    removeFear: function(key) {
+      this.$store.commit('removeFear', key)
+      this.$socket.emit('set fears', this.fears);
     }
+  },
+  components: {
+    FearItem: FearItem
   }
 }
 </script>

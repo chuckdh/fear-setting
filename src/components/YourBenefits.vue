@@ -46,6 +46,7 @@ export default {
       },
       set (newBenefitsValue) { 
         this.$store.commit("setBenefits", newBenefitsValue );
+        this.$socket.emit('set benefits', this.benefits);
       }
     }
   },
@@ -58,6 +59,11 @@ export default {
     },
     hasEnoughFears () {
       return this.$store.getters.hasEnoughFears;
+    }
+  },
+  watch: {
+    benefits () {
+       //this.$socket.emit('set benefits', this.benefits);      
     }
   }
 }

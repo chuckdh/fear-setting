@@ -8,7 +8,7 @@
       </b-row>
 
       <b-row>
-        <b-col sm="8">
+        <b-col>
           <h2>Fears</h2>
 
           <b-alert v-if="!hasFears" show variant="warning">
@@ -21,7 +21,7 @@
               Ideally, you should have arond 10 to 20 fears.
             </b-alert>
 
-            <table class="table">
+            <table class="table table-striped table-sm table-responsive">
               
               <thead class="thead-dark">
                 <tr>
@@ -33,8 +33,8 @@
               </thead>
               
               <transition-group name="list" tag="tbody">
-                <tr v-for="(fear, index) in fears" :key="fear.id">
-                  <th scope="row">{{ index + 1 }}</th>
+                <tr v-for="(fear, key, index) in fears" :key="key">
+                  <th scope="row" class="col-1">{{ index + 1 }}</th>
                   <td>{{fear.define}}</td>
                   <td>{{fear.prevent}}</td>
                   <td>{{fear.repair}}</td>
@@ -46,42 +46,35 @@
           </template>
           
         </b-col>
+      </b-row>
+
+      <b-row>
         <b-col>
-          <b-container>
+          <h2>Possible benefits</h2>
 
-            <b-row>
-              <b-col>
-                <h2>Possible benefits</h2>
+          <transition name="fade">
+            <b-alert v-if="!hasBenefits" show variant="warning">
+              You did not write down your possible benefits on the second page yet. You should do that first.
+            </b-alert>
+            <div class="text-justify" v-else>
+              {{benefits}}
+            </div>
+          </transition>
 
-                <transition name="fade">
-                  <b-alert v-if="!hasBenefits" show variant="warning">
-                    You did not write down your possible benefits on the second page yet. You should do that first.
-                  </b-alert>
-                  <div class="text-justify" v-else>
-                    {{benefits}}
-                  </div>
-                </transition>
+        </b-col>
 
-              </b-col>
-            </b-row>
+        <b-col>
+          <h2>The Cost of Inaction</h2>
 
-            <b-row>
-              <b-col>
-                <h2>The Cost of Inaction</h2>
-
-                <transition name="fade">
-                  <b-alert v-if="!hasCost" show variant="warning">
-                    You did not write down your cost of inaction page yet. You should do that first.
-                  </b-alert>
-                  <div class="text-justify" v-else>
-                    {{cost}}
-                  </div>
-                </transition>
-                
-              </b-col>
-            </b-row>
-
-          </b-container>
+          <transition name="fade">
+            <b-alert v-if="!hasCost" show variant="warning">
+              You did not write down your cost of inaction page yet. You should do that first.
+            </b-alert>
+            <div class="text-justify" v-else>
+              {{cost}}
+            </div>
+          </transition>
+          
         </b-col>
       </b-row>
 

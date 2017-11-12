@@ -1,7 +1,10 @@
 <template>
   <div id="app">
 
-    <b-navbar toggleable="md" type="dark" variant="primary">
+    <div v-if="!isConnected">Not connected....</div>
+
+    <template v-else>
+      <b-navbar toggleable="md" type="dark" variant="primary">
 
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
@@ -18,6 +21,7 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
+          <b-nav-item href="#" @click.prevent>Connected: {{ connectedClients }}</b-nav-item>
           <b-nav-item href="https://github.com/chuckdh/fear-setting">Github</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -44,13 +48,15 @@
         </b-row>
     </b-container>
 
-    <b-navbar class="navbar fixed-bottom" toggleable="md">
+    <b-navbar class="navbar footer" toggleable="md">
       <b-navbar-nav>
         <VLink href="/terms-and-conditions">Terms And Conditions</VLink>
         <VLink href="/privacy-policy">Privacy Policy</VLink>
         <VLink href="/cookie-policy">Cookie Policy</VLink>
       </b-navbar-nav>
     </b-navbar>
+    </template>
+
   </div>
 
 </template>
@@ -68,7 +74,22 @@ import LegalInformation from './components/LegalInformation.vue'
 
 export default {
   name: 'app',
+  sockets:{
+    connect () {
+      console.info('socket connected')
+    },
+    disconnect () {
+      console.error('socket disconnected')
+      this.$store.commit('disconnected')
+    }
+  },
   computed: {
+    isConnected () {
+      return this.$store.state.connected
+    },
+    connectedClients () {
+      return this.$store.state.connectedClients
+    },
     currentRoute () {
       return this.$root.currentRoute
     },
@@ -91,5 +112,20 @@ export default {
 <style lang="scss">
 .top-margin {
   margin-top: 30px;
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px; /* Margin bottom by footer height */
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Set the fixed height of the footer here */
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
 }
 </style>

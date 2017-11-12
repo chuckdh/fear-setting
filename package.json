@@ -7,7 +7,8 @@
   "private": true,
   "scripts": {
     "build": "webpack --config webpack.prod.js",
-    "dev": "webpack-dev-server --config webpack.dev.js --open"
+    "dev": "webpack-dev-server --config webpack.dev.js --open",
+    "srv": "node ./src/server/server.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.31",
@@ -38,6 +39,7 @@
     "socket.io": "^2.0.4",
     "uuid": "^3.1.0",
     "vue": "^2.5.3",
+    "vue-socket.io": "^2.1.1-a",
     "vuex": "^3.0.1"
   }
 }

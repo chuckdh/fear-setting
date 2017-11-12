@@ -50,6 +50,7 @@ export default {
       },
       set (newCostValue) { 
         this.$store.commit("setCost", newCostValue );
+        this.$socket.emit('set cost', newCostValue);    
       }
     }
   },
@@ -62,6 +63,11 @@ export default {
     },
     hasEnoughFears () {
       return this.$store.getters.hasEnoughFears;
+    }
+  },
+  watch: {
+    cost () {
+       //this.$socket.emit('set cost', this.cost);      
     }
   }
 }

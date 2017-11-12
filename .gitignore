@@ -1,4 +1,5 @@
 dist/
+save.json
 
 # Dependency directories
 node_modules/
