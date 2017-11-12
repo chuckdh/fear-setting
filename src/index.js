@@ -9,7 +9,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import store from './store';
 
-const host = process.env.HOST || 'localhost';
+const host = window.location.hostname;
 const port = process.env.PORT || 3000;
 console.log('Connectiong on  '+'//'+host+':'+port)
 
