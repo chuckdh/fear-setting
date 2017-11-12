@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueSocketio from 'vue-socket.io';
 import BootstrapVue from 'bootstrap-vue'
-import VLink from './components/VLink.vue'
 import App from './App.vue'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -21,7 +20,7 @@ if(port === 80 || port === 443) {
   url = host.concat(':'+port);
 }
 
-console.log('Connectiong on  '+url)
+console.log('Connecting on  '+url)
 
 Vue.use(VueSocketio, url, store);
 Vue.use(BootstrapVue);
@@ -33,7 +32,6 @@ const app = new Vue({
     currentRoute: window.location.pathname
   },
   components: {
-    VLink: VLink,
     App: App
   },
   render: h => h(App),

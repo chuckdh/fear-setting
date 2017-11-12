@@ -5,14 +5,14 @@
 For development: 
 
     yarn # Install deps
-    yarn run dev # Start webserver in dev mode
+    yarn run start # Start webserver in dev mode
     yarn run webpack # Start webpack's development server (opens up browser windows)
 
 or, for production
 
     yarn # Install deps
     yarn run build # Build app for production to ./dist
-    yarn cross-env PORT=80 yarn start # Start web server in production mode on port 80
+    yarn cross-env NODE_ENV=production PORT=80 yarn start # Start web server in production mode on port 80
 
 for dev server
 
@@ -54,4 +54,10 @@ The app has 3+2 pages. On the first page, the user can create fears and we displ
 
 # Dev notes
 
-There is many room for improvement here. 
+For development, you don't have to build the app with *yarn run build*, because you only need the node server for the sockets. Webpack serves you the actual compiled content. In production, you have to run the build before *yarn run start*, so the node server can serve the compiled files from ./dist.
+
+The client entry point is the ./src/index.js file. Here the routes, the strore and the sockets are set up, then the ./src/App.vue file renders. The App.vue sets up the site layout, loads in all the other components, then renders the correct one based on the current route. Each page has it's own component. Two components are not standalone, the VLink.vue, wich is used to render the links correctly for the routing, and the FearItem.vue, wich is used by the FearList.vue component to better break down responsibility. The components are responsible for triggering sockets to save the data they are handling. So, the CostOfInaction.vue only triggers save for the "cost" (text) data. 
+
+After a save is triggered, the data is sent to the node server through socket.io, and the server broadcasts it to everyone else, and saves the state to a file. Should the server crash or stop, on the next startup the state is read from the save file. When a client connects, the server sends it the inital state it should have. If a client can not connect to the server (or loses it's onnection), then editing the fear-list or other data is not possible, because syncing after offline mode is difficult. The offline client could have vastly different data set than that of the server and the other clients have. 
+
+There is many room for improvement here. The save could be improved, could use a proper database like Redis or MongoDB. Also TypeScript is set up, but ultimatly not used. The server code is also in older style js. The design also could be even more gadget friendly. The node server is extremly simple. It does not handle authentication, and is basicly impossible to scale. Should set up a Redis server for it so it can be clustered, and the clusters would be able to have a shared memory. 

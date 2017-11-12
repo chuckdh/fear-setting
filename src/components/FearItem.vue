@@ -26,7 +26,6 @@ export default {
   data: function () {
     return { 
       key: this.fearKey,
-      //fear: this.initalFear
     }
   },
   computed: {
