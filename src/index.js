@@ -9,11 +9,14 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import store from './store';
 
-const host = window.location.hostname;
+const protocol = location.protocol;
+const slashes = protocol.concat("//");
+const host = slashes.concat(window.location.hostname);
 const port = process.env.PORT || 3000;
-console.log('Connectiong on  '+'//'+host+':'+port)
+const url = host.concat(':'+port);
+console.log('Connectiong on  '+url)
 
-Vue.use(VueSocketio, '//'+host+':'+port, store);
+Vue.use(VueSocketio, url, store);
 Vue.use(BootstrapVue);
 
 const app = new Vue({
