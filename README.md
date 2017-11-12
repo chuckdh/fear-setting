@@ -2,14 +2,17 @@
 
 ## Install
 
-    yarn
-    yarn run build
-    yarn run srv
+For development: 
 
-or
+    yarn # Install deps
+    yarn run dev # Start webserver in dev mode
+    yarn run webpack # Start webpack's development server (opens up browser windows)
 
-    yarn run srv
-    yarn run dev
+or, for production
+
+    yarn # Install deps
+    yarn run build # Build app for production to ./dist
+    yarn run start # Start web server in production mode (port 80)
 
 for dev server
 

@@ -1,7 +1,12 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const fs = require('fs');
+const path = require('path');
+
+const distDirectory = path.join(__dirname, '../../dist');
+const port = process.env.PORT || 3000;
 
 let stateObject = {
   fears: {},
@@ -64,6 +69,14 @@ io.on('connection', function(socket){
   });
 });
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
+app.use(express.static(distDirectory))
+
+app.get('/*', function(req, res){
+  res.sendFile('./index.html', { 
+    root: distDirectory
+  });
+});
+
+http.listen(port, function(){
+  console.log('listening on *:'+port);
 });
