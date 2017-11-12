@@ -21,7 +21,7 @@
               Ideally, you should have arond 10 to 20 fears.
             </b-alert>
 
-            <table class="table table-striped table-sm table-responsive">
+            <table class="table table-sm table-responsive">
               
               <thead class="thead-dark">
                 <tr>
@@ -34,10 +34,10 @@
               
               <transition-group name="list" tag="tbody">
                 <tr v-for="(fear, key, index) in fears" :key="key">
-                  <th scope="row" class="col-1">{{ index + 1 }}</th>
-                  <td>{{fear.define}}</td>
-                  <td>{{fear.prevent}}</td>
-                  <td>{{fear.repair}}</td>
+                  <th scope="row">{{ index + 1 }}</th>
+                  <td><div>{{fear.define}}</div></td>
+                  <td><div>{{fear.prevent}}</div></td>
+                  <td><div>{{fear.repair}}</div></td>
                 </tr>
               </transition-group>
               
@@ -52,28 +52,24 @@
         <b-col>
           <h2>Possible benefits</h2>
 
-          <transition name="fade">
-            <b-alert v-if="!hasBenefits" show variant="warning">
-              You did not write down your possible benefits on the second page yet. You should do that first.
-            </b-alert>
-            <div class="text-justify" v-else>
-              {{benefits}}
-            </div>
-          </transition>
+          <b-alert v-if="!hasBenefits" show variant="warning">
+            You did not write down your possible benefits on the second page yet.
+          </b-alert>
+          <div class="text-justify" v-else>
+            {{benefits}}
+          </div>
 
         </b-col>
 
         <b-col>
           <h2>The Cost of Inaction</h2>
 
-          <transition name="fade">
-            <b-alert v-if="!hasCost" show variant="warning">
-              You did not write down your cost of inaction page yet. You should do that first.
-            </b-alert>
-            <div class="text-justify" v-else>
-              {{cost}}
-            </div>
-          </transition>
+          <b-alert v-if="!hasCost" show variant="warning">
+            You did not write down your cost of inaction page yet.
+          </b-alert>
+          <div class="text-justify" v-else>
+            {{cost}}
+          </div>
           
         </b-col>
       </b-row>
@@ -85,13 +81,13 @@
 <script>
 export default {
   computed: {
-    fears: function () {
+    fears () {
       return this.$store.state.fears;
     },
-    benefits: function () {
+    benefits () {
       return this.$store.state.benefits;
     },
-    cost: function () {
+    cost () {
       return this.$store.state.cost;
     },
     hasBenefits () {
@@ -111,13 +107,6 @@ export default {
 </script>
 
 <style>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0
-}
-
 .list-item {
   display: inline-block;
   margin-right: 10px;

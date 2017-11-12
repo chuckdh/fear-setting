@@ -4,9 +4,11 @@
 
     yarn
     yarn run build
+    yarn run srv
 
 or
 
+    yarn run srv
     yarn run dev
 
 for dev server
