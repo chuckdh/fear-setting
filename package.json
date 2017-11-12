@@ -6,6 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "heroku-postbuild": "webpack --config webpack.prod.js",
     "build": "webpack --config webpack.prod.js",
     "dev": "node ./src/server/server.js",
     "webpack": "webpack-dev-server --config webpack.dev.js --open",

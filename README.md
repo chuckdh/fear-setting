@@ -48,6 +48,10 @@ On the third page, "The Cost of Inaction", you also write, but the topic is:
 
 ---
 
-### Dev notes
+### What you see
 
-The app has 3 pages. On the first page, the user can create fears and we display it to them in a list-like manner. This is also the place where the fears can be edited or removed. On the second page, we ask the user to write a small essay, so it should be clean, and they also should see the fears they wrote down. The third page is essentially the same. All of this information should be syncded to all connected clients in real-time.
+The app has 3+2 pages. On the first page, the user can create fears and we display it to them in a list-like manner. This is also the place where the fears can be edited or removed. On the second page, we ask the user to write a small essay, so it should be clean, and they also should see the fears they wrote down. The third page is essentially the same. All of this information should be syncded to all connected clients in real-time. There are 2 extra pages, a welcome screen with the TED talk and a conclusion page, where you can see all your answers.
+
+# Dev notes
+
+There is many room for improvement here. 
