@@ -1,5 +1,9 @@
 # FEAR-Setting
 
+## Demo
+
+[See on Heroku](https://fear-setting.herokuapp.com/)
+
 ## Install
 
 For development: 
@@ -13,8 +17,6 @@ or, for production
     yarn # Install deps
     yarn run build # Build app for production to ./dist
     yarn cross-env NODE_ENV=production PORT=80 yarn start # Start web server in production mode on port 80
-
-for dev server
 
 ## Scope
 

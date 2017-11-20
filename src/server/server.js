@@ -4,6 +4,7 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const fs = require('fs');
 const path = require('path');
+const _ = require('lodash');
 
 const distDirectory = path.join(__dirname, '../../dist');
 const port = process.env.PORT || 3000;
@@ -17,17 +18,18 @@ let stateObject = {
 let connectedClients = 0;
 const saveFile = "./save.json";
 
-saveCurrentState = function() {
+const saveCurrentState = function() {
   fs.writeFile(saveFile, JSON.stringify(stateObject), function(err) {
       if(err) {
           return console.log(err);
       }
 
-      console.log("State saved");
+      console.log("["+(new Date().toISOString())+"] State saved");
   }); 
 }
+const throttledSaveCurrentState = _.throttle(saveCurrentState, 1000);
 
-loadLastSavedState = function() {
+const loadLastSavedState = function() {
   console.log("Loading last save...");
   if (fs.existsSync(saveFile)) {
     console.log("Save found....");
@@ -54,17 +56,17 @@ io.on('connection', function(socket){
 
   socket.on('set fears', function(fears){
     stateObject.fears = fears;
-    saveCurrentState();
+    throttledSaveCurrentState();
     socket.broadcast.emit('set fears', stateObject.fears);
   });
   socket.on('set benefits', function(benefits){
     stateObject.benefits = benefits;
-    saveCurrentState();
+    throttledSaveCurrentState();
     socket.broadcast.emit('set benefits', stateObject.benefits);
   });
   socket.on('set cost', function(cost){
     stateObject.cost = cost;
-    saveCurrentState();
+    throttledSaveCurrentState();
     socket.broadcast.emit('set cost', stateObject.cost);
   });
 });
